@@ -38,6 +38,7 @@ RUN \
   && apt -y autoremove \
   && apt -y autoclean \
   && apt -y clean 
+RUN mkdir /opt/x86
 RUN cd /opt/x86
 RUN git clone https://github.com/mxe/mxe.git \
   && cp -r /opt/x86 /opt/x64
