@@ -40,8 +40,8 @@ RUN \
   && apt -y clean 
 RUN mkdir /opt/x86
 WORKDIR /opt/x86
-RUN git clone https://github.com/mxe/mxe.git
-RUN cp -r /opt/x86 /opt/x64
+RUN git clone https://github.com/mxe/mxe.git \
+   && cp -r /opt/x86 /opt/x64
 WORKDIR /opt/x86/mxe
 RUN make --jobs=$(nproc) JOBS=$(nproc) MXE_TARGETS='i686-w64-mingw32.static' qtbase
 WORKDIR /opt/x64/mxe
