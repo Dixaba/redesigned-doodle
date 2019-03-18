@@ -37,7 +37,7 @@ RUN \
     xz-utils \
   && apt -y autoremove \
   && apt -y autoclean \
-  && apt -y clean \
+  && apt -y clean 
 RUN cd /opt/x86
 RUN git clone https://github.com/mxe/mxe.git \
   && cp -r /opt/x86 /opt/x64
