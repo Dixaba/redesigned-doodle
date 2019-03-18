@@ -40,12 +40,12 @@ RUN \
   && apt -y clean 
 RUN mkdir /opt/x86
 RUN cd /opt/x86
-RUN git clone https://github.com/mxe/mxe.git \
-  && cp -r /opt/x86 /opt/x64
-RUN cd /opt/x86/mxe \
-  && make --jobs=$(nproc) JOBS=$(nproc) MXE_TARGETS='i686-w64-mingw32.static' qtbase
-RUN cd /opt/x64/mxe \
-  && make --jobs=$(nproc) JOBS=$(nproc) MXE_TARGETS='x86_64-w64-mingw32.static' qtbase
+RUN git clone https://github.com/mxe/mxe.git
+RUN cp -r /opt/x86 /opt/x64
+RUN cd /opt/x86/mxe
+RUN make --jobs=$(nproc) JOBS=$(nproc) MXE_TARGETS='i686-w64-mingw32.static' qtbase
+RUN cd /opt/x64/mxe
+RUN make --jobs=$(nproc) JOBS=$(nproc) MXE_TARGETS='x86_64-w64-mingw32.static' qtbase
 ENV PATH="${PATH}:/opt/x86/mxe/usr/bin"
 WORKDIR /project/build
 CMD qmake /project/source && make -j $(nproc)
