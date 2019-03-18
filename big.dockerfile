@@ -39,14 +39,12 @@ RUN \
   && apt -y autoclean \
   && apt -y clean 
 RUN mkdir /opt/x86
-RUN cd /opt/x86
+WORKDIR /opt/x86
 RUN git clone https://github.com/mxe/mxe.git
-RUN pwd
-RUN ls
 RUN cp -r /opt/x86 /opt/x64
-RUN cd /opt/x86/mxe
+WORKDIR /opt/x86/mxe
 RUN make --jobs=$(nproc) JOBS=$(nproc) MXE_TARGETS='i686-w64-mingw32.static' qtbase
-RUN cd /opt/x64/mxe
+WORKDIR /opt/x64/mxe
 RUN make --jobs=$(nproc) JOBS=$(nproc) MXE_TARGETS='x86_64-w64-mingw32.static' qtbase
 ENV PATH="${PATH}:/opt/x86/mxe/usr/bin"
 WORKDIR /project/build
